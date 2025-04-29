@@ -19,4 +19,4 @@ jobs:
 
       - name: Run cppcheck
         run: |
-          cppcheck --enable=all --inconclusive --quiet --force 
+          cppcheck --enable=all --inconclusive --quiet --force Projects/blob/master/example.cpp
