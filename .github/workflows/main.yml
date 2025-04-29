@@ -1,4 +1,4 @@
-name: Django CI
+name: Cppcheck
 
 on:
   push:
@@ -7,31 +7,16 @@ on:
     branches: [master]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest  # instead of ubuntu-latest
-
-    strategy:
-      matrix:
-        python-version: [3.8]  # Django 2.2 works reliably with Python 3.8
+  cppcheck:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
+      - name: Install cppcheck
+        run: sudo apt-get update && sudo apt-get install -y cppcheck
 
-      - name: Install dependencies
+      - name: Run cppcheck
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run migrations
-        run: |
-          python manage.py migrate
-
-      - name: Run tests
-        run: |
-          python manage.py test
+          cppcheck --enable=all --inconclusive --quiet --force 
