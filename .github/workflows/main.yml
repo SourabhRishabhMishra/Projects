@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04  # instead of ubuntu-latest
+    runs-on: ubuntu-latest  # instead of ubuntu-latest
 
     strategy:
       matrix:
